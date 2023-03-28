@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TurkiyeCase.Bolge>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BolgeAdi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BolgeAdi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BolgeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BolgeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BolgeId })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+<br />
+<nav>
+    <ul>
+        <li><a href="/Sehirs">Şehirler</a></li>
+        <li><a href="/Home">Menü</a></li>
+    </ul>
+</nav>

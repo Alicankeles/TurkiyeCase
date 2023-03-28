@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TurkiyeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolge">
+          <Key>
+            <PropertyRef Name="BolgeId" />
+          </Key>
+          <Property Name="BolgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolgeAdi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="SehirId" />
+          </Key>
+          <Property Name="SehirId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SehirAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="BolgeId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Sehir__BolgeId__267ABA7A">
+          <End Role="Bolge" Type="Self.Bolge" Multiplicity="0..1" />
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolge">
+              <PropertyRef Name="BolgeId" />
+            </Principal>
+            <Dependent Role="Sehir">
+              <PropertyRef Name="BolgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TurkiyeModelStoreContainer">
+          <EntitySet Name="Bolge" EntityType="Self.Bolge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Sehir__BolgeId__267ABA7A" Association="Self.FK__Sehir__BolgeId__267ABA7A">
+            <End Role="Bolge" EntitySet="Bolge" />
+            <End Role="Sehir" EntitySet="Sehir" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TurkiyeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolge">
+          <Key>
+            <PropertyRef Name="BolgeId" />
+          </Key>
+          <Property Name="BolgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolgeAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sehirs" Relationship="Self.FK__Sehir__BolgeId__267ABA7A" FromRole="Bolge" ToRole="Sehir" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="SehirId" />
+          </Key>
+          <Property Name="SehirId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SehirAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BolgeId" Type="Int32" />
+          <NavigationProperty Name="Bolge" Relationship="Self.FK__Sehir__BolgeId__267ABA7A" FromRole="Sehir" ToRole="Bolge" />
+        </EntityType>
+        <Association Name="FK__Sehir__BolgeId__267ABA7A">
+          <End Role="Bolge" Type="Self.Bolge" Multiplicity="0..1" />
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolge">
+              <PropertyRef Name="BolgeId" />
+            </Principal>
+            <Dependent Role="Sehir">
+              <PropertyRef Name="BolgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TurkiyeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolges" EntityType="Self.Bolge" />
+          <EntitySet Name="Sehirs" EntityType="Self.Sehir" />
+          <AssociationSet Name="FK__Sehir__BolgeId__267ABA7A" Association="Self.FK__Sehir__BolgeId__267ABA7A">
+            <End Role="Bolge" EntitySet="Bolges" />
+            <End Role="Sehir" EntitySet="Sehirs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TurkiyeModelStoreContainer" CdmEntityContainer="TurkiyeEntities">
+          <EntitySetMapping Name="Bolges">
+            <EntityTypeMapping TypeName="TurkiyeModel.Bolge">
+              <MappingFragment StoreEntitySet="Bolge">
+                <ScalarProperty Name="BolgeId" ColumnName="BolgeId" />
+                <ScalarProperty Name="BolgeAdi" ColumnName="BolgeAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehirs">
+            <EntityTypeMapping TypeName="TurkiyeModel.Sehir">
+              <MappingFragment StoreEntitySet="Sehir">
+                <ScalarProperty Name="SehirId" ColumnName="SehirId" />
+                <ScalarProperty Name="SehirAdi" ColumnName="SehirAdi" />
+                <ScalarProperty Name="BolgeId" ColumnName="BolgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
